@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "investAPI", "investAPI\investAPI.csproj", "{EA23C4C7-34B3-48FA-AB6E-1E587BF9B634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA23C4C7-34B3-48FA-AB6E-1E587BF9B634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA23C4C7-34B3-48FA-AB6E-1E587BF9B634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA23C4C7-34B3-48FA-AB6E-1E587BF9B634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA23C4C7-34B3-48FA-AB6E-1E587BF9B634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DE0633C-4CA1-4DA6-9A27-5089C254B276}
+	EndGlobalSection
+EndGlobal
