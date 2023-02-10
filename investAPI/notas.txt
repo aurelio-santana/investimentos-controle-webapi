@@ -1,0 +1,66 @@
+﻿1. install > Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+//Editar o AddControllers em Program.cs
+
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+Serve para ignorar os loopings de métodos entre classes diferentes, onde uma fica referenciando o método da outra.
+Os parâmetros serão exibidos uma vez com valores, e os que tiverem repetições serão exibidos mais uma única vez,
+porem vazios, indicando que há um looping.
+
+
+//-------------------------------------
+
+
+
+//Repository.cs
+
+public async Task<Professor[]> GetProfessoresAsyncByAlunoId(int alunoId, bool includeDisciplina)
+        {
+            IQueryable<Professor> query = _context.Professores;
+
+            if (includeDisciplina)
+            {
+                query = query.Include(p => p.Disciplinas);
+            }
+
+            query = query.AsNoTracking()
+                         .OrderBy(aluno => aluno.Id)
+                         .Where(aluno => aluno.Disciplinas.Any(d =>
+                            d.AlunosDisciplinas.Any(ad => ad.AlunoId == alunoId)));
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Professor[]> GetAllProfessoresAsync(bool includeDisciplinas = true)
+        {
+            IQueryable<Professor> query = _context.Professores;
+
+            if (includeDisciplinas)
+            {
+                query = query.Include(c => c.Disciplinas);
+            }
+
+            query = query.AsNoTracking()
+                         .OrderBy(professor => professor.Id);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Professor> GetProfessorAsyncById(int professorId, bool includeDisciplinas = true)
+        {
+            IQueryable<Professor> query = _context.Professores;
+
+            if (includeDisciplinas)
+            {
+                query = query.Include(pe => pe.Disciplinas);
+            }
+
+            query = query.AsNoTracking()
+                         .OrderBy(professor => professor.Id)
+                         .Where(professor => professor.Id == professorId);
+
+            return await query.FirstOrDefaultAsync();
+        }
+//

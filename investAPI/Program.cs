@@ -25,13 +25,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 
 
 
-builder.Services.AddDbContext<DataContext>
+
+
+builder.Services.AddDbContext<DataContext> //DataContext é passado para o Repository durante a instancia
     //(x => x.UseSqlite(Configuration.GetConnectionString("Default"));
     (x => x.UseSqlite(("Name=DefaultConn")));
+
+builder.Services.AddControllers();
+
+builder.Services.AddScoped<IRepository, Repository>(); //Toda vez que instanciar uma controller será passado um Repository (em StockController)
+//Repository e IRepository é a camada de encapsulamento de acesso ao DataContext
 
 
 
@@ -48,6 +54,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//liberando permissões de acesso a API
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -55,3 +64,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
+
