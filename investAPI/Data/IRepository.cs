@@ -14,10 +14,14 @@ namespace investAPI.Data
         Task<Stock[]> GetAllStocksAsync(bool includeSomething);
         Task<Stock[]> GetStocksAsyncBySomethingId(int somethingId, bool includeSomething);
         Task<Stock> GetStockAsyncById(int stockId, bool includeSomething);
+        Task<Stock[]> GetStocksAsyncByTicker(string ticker, bool includeSomething);
 
         //REIT
         Task<Reit[]> GetAllReitsAsync(bool includeSomething);
         Task<Reit> GetReitAsyncById(int reitId, bool includeSomething);
         //Task<Reit[]> GetReitsAsyncByStockId(int somethingId, bool includeSomething);
+
+        //Cálculo de soma de assets passado para o front
+        //Task<Reit[]> GetReitsAsyncByTicker(string ticker, bool includeSomething);
     }
 }

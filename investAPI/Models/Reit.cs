@@ -2,7 +2,7 @@
 {
     public class Reit
     {
-        public Reit() { }
+        //public Reit() { }
         public Reit(int id, string ticker, int quantity, float averagePrice,
             float total, float currentQuote, float profit)
         {

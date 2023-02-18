@@ -12,7 +12,7 @@ namespace investAPI.Data
             _context = context;
         }
         public void Add<T>(T entity) where T : class
-        // entity se refere as tabelas Stock, Reit etc
+            // entity se refere as tabelas Stock, Reit etc
         {
             _context.Add(entity);
             // _context é o DataContext passado em Program.cs durante a conexão do banco
@@ -60,7 +60,7 @@ namespace investAPI.Data
             //}
 
             query = query.AsNoTracking()
-                         .OrderBy(stock => stock.Id)
+                         .OrderBy(s => s.Id)
                          .Where(stock => stock.Id == stockId);
 
             return await query.FirstOrDefaultAsync();
@@ -78,6 +78,17 @@ namespace investAPI.Data
             //query = query.AsNoTracking()
             //             .OrderBy(stock => stock.Id)
             //             .Where(stock => stock.StocksSomething.Any(ad => ad.SomethingId == somethingId));
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Stock[]> GetStocksAsyncByTicker(string stockTicker, bool includeSomething)
+        {
+            IQueryable<Stock> query = _context.Stocks;
+
+            query = query.AsNoTracking()
+                         .OrderBy(stock => stock.Id)
+                         .Where(stock => stock.Ticker == stockTicker);
 
             return await query.ToArrayAsync();
         }
@@ -134,6 +145,18 @@ namespace investAPI.Data
             return await query.ToArrayAsync();
         }
 
+        //Cálculo de soma de assets passado para o front
+        //public async Task<Reit[]> GetReitsAsyncByTicker(string reitTicker, bool includeSomething)
+        //{
+        //    IQueryable<Reit> query = _context.Reits;
+
+        //    query = query.AsNoTracking()
+        //                 .OrderBy(reit => reit.Id)
+        //                 .Where(reit => reit.Ticker == reitTicker);
+
+        //    return await query.ToArrayAsync();
+
+        //}
 
     }
 }

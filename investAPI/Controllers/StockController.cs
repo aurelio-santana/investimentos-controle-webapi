@@ -30,7 +30,7 @@ namespace investAPI.Controllers
             
         }
 
-        [HttpGet("{StockId}")]
+        [HttpGet("{stockId}")]
         public async Task<IActionResult> GetByStockId(int stockId)
         {
             try
@@ -59,6 +59,22 @@ namespace investAPI.Controllers
             }
 
         }
+
+        //Cálculo de soma de assets passado para o front
+        //[HttpGet("Operations/{stockTicker}")]
+        //public async Task<IActionResult> GetByTicker(string stockTicker)
+        //{
+        //    try
+        //    {
+        //        var result = await _repo.GetStocksAsyncByTicker(stockTicker, true);
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest($"Erro: {ex.Message}");
+        //    }
+
+        //}
 
         [HttpPost]
         public async Task<IActionResult> post(Stock model)
