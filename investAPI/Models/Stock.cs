@@ -5,7 +5,7 @@
 
         //public Stock() { }
         public Stock(int id, string ticker, int quantity, float averagePrice,
-            float total, float currentQuote, float profit)
+            float total, float currentQuote, float profit, int orderType, DateTime date)
         {
             this.Id = id;
             this.Ticker = ticker;
@@ -14,6 +14,9 @@
             this.Total = total;
             this.CurrentQuote = currentQuote;
             this.Profit = profit;
+
+            this.OrderType = orderType;
+            this.Date = date;
         }
 
         public int Id { get; set; }
@@ -23,5 +26,8 @@
         public float Total { get; set; }
         public float CurrentQuote { get; set; }
         public float Profit { get; set; }
+        public int OrderType { get; set; }
+        public DateTime Date { get; set; }
+
     }
 }

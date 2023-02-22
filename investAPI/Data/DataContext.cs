@@ -16,8 +16,8 @@ namespace investAPI.Data
             builder.Entity<Stock>()
                 .HasData(new List<Stock>(){
                     //id, ticker, quantity, averagePrice, total, quote, profit
-                    new Stock(1, "CEMIG3 api", 2, 10, 20, 15, 105),
-                    new Stock(2, "WEG3", 2, 10, 20, 15, 10),
+                    new Stock(1, "CEMIG3 api", 2, 10, 20, 15, 105, 1, new DateTime (2001,11,10)),
+                    new Stock(2, "WEG3", 2, 10, 20, 15, 10, 1, new DateTime(2001,11,10))
                 });
             builder.Entity<Reit>()
                 .HasData(new List<Reit>(){
