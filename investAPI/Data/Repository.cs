@@ -33,7 +33,6 @@ namespace investAPI.Data
 
 
         /* STOCKS */
-
         public async Task<Stock[]> GetAllStocksAsync(bool includeSomething = false)
         {
             IQueryable<Stock> query = _context.Stocks;
@@ -81,7 +80,6 @@ namespace investAPI.Data
 
             return await query.ToArrayAsync();
         }
-
         public async Task<Stock[]> GetStocksAsyncByTicker(string stockTicker, bool includeSomething)
         {
             IQueryable<Stock> query = _context.Stocks;
@@ -95,7 +93,6 @@ namespace investAPI.Data
 
 
         /* REIT */
-
         public async Task<Reit[]> GetAllReitsAsync(bool includeSomething = false)
         {
             IQueryable<Reit> query = _context.Reits;
@@ -127,7 +124,6 @@ namespace investAPI.Data
 
             return await query.FirstOrDefaultAsync();
         }
-
         public async Task<Reit[]> GetReitsAsyncBySomethingId(int somethingId, bool includeSomething)
         {
             IQueryable<Reit> query = _context.Reits;
@@ -144,19 +140,98 @@ namespace investAPI.Data
 
             return await query.ToArrayAsync();
         }
-
         //Cálculo de soma de assets passado para o front
-        //public async Task<Reit[]> GetReitsAsyncByTicker(string reitTicker, bool includeSomething)
+        public async Task<Reit[]> GetReitsAsyncByTicker(string reitTicker, bool includeSomething)
+        {
+            IQueryable<Reit> query = _context.Reits;
+
+            query = query.AsNoTracking()
+                         .OrderBy(reit => reit.Id)
+                         .Where(reit => reit.Ticker == reitTicker);
+
+            return await query.ToArrayAsync();
+
+        }
+
+
+        /* YIELD */
+        public async Task<Yield[]> GetAllYieldsAsync(bool includeSomething = false)
+        {
+            IQueryable<Yield> query = _context.Yields;
+
+            //if (includeSomething)
+            //{
+            //    query = query.Include(pe => pe.ReitsSomething)
+            //                 .ThenInclude(ad => ad.Something);
+            //}
+
+            query = query.AsNoTracking()
+                         .OrderBy(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Yield> GetYieldAsyncById(int yieldId, bool includeSomething)
+        {
+            IQueryable<Yield> query = _context.Yields;
+
+            //if (includeSomething)
+            //{
+            //    query = query.Include(a => a.ReitsSomething)
+            //                 .ThenInclude(ad => ad.Something);
+            //}
+
+            query = query.AsNoTracking()
+                         .OrderBy(yield => yield.Id)
+                         .Where(yield => yield.Id == yieldId);
+
+            return await query.FirstOrDefaultAsync();
+        }
+        public async Task<Yield[]> GetYieldsAsyncBySomethingId(int somethingId, bool includeSomething)
+        {
+            IQueryable<Yield> query = _context.Yields;
+
+            //if (includeSomething)
+            //{
+            //    query = query.Include(p => p.ReitsSomething)
+            //                 .ThenInclude(ad => ad.Something)
+            //}
+
+            //query = query.AsNoTracking()
+            //             .OrderBy(reit => reit.Id)
+            //             .Where(reit => reit.ReitsSomething.Any(ad => ad.SomethingId == somethingId));
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<Yield[]> GetYieldsAsyncByTicker(string yieldTicker, bool includeSomething)
+        {
+            IQueryable<Yield> query = _context.Yields;
+
+            query = query.AsNoTracking()
+                         .OrderBy(yield => yield.Id)
+                         .Where(yield => yield.Ticker == yieldTicker);
+
+            return await query.ToArrayAsync();
+
+        }
+
+        //Task<Reit> IRepository.GetReitsAsyncBySomethingId(int somethingId, bool includeSomething)
         //{
-        //    IQueryable<Reit> query = _context.Reits;
-
-        //    query = query.AsNoTracking()
-        //                 .OrderBy(reit => reit.Id)
-        //                 .Where(reit => reit.Ticker == reitTicker);
-
-        //    return await query.ToArrayAsync();
-
+        //    throw new NotImplementedException();
         //}
 
+        //Task<Reit> IRepository.GetReitsAsyncByTicker(string ticket, bool includeSomething)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<Yield> IRepository.GetYieldsAsyncBySomethingId(int somethingId, bool includeSomething)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task<Yield> IRepository.GetYieldsAsyncByTicker(string ticker, bool includeSomething)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

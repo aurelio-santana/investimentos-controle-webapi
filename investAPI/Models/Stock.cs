@@ -2,7 +2,6 @@
 {
     public class Stock
     {
-
         //public Stock() { }
         public Stock(int id, string ticker, int quantity, float averagePrice,
             float total, float currentQuote, float profit, int orderType, DateTime date)

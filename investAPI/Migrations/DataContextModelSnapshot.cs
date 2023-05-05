@@ -29,6 +29,12 @@ namespace investAPI.Migrations
                     b.Property<float>("CurrentQuote")
                         .HasColumnType("REAL");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("INTEGER");
+
                     b.Property<float>("Profit")
                         .HasColumnType("REAL");
 
@@ -52,6 +58,8 @@ namespace investAPI.Migrations
                             Id = 1,
                             AveragePrice = 10f,
                             CurrentQuote = 15f,
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrderType = 1,
                             Profit = 10f,
                             Quantity = 2,
                             Ticker = "MXRF11",
@@ -62,6 +70,8 @@ namespace investAPI.Migrations
                             Id = 2,
                             AveragePrice = 10f,
                             CurrentQuote = 15f,
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OrderType = 1,
                             Profit = 10f,
                             Quantity = 2,
                             Ticker = "HGLG11",
@@ -81,7 +91,7 @@ namespace investAPI.Migrations
                     b.Property<float>("CurrentQuote")
                         .HasColumnType("REAL");
 
-                    b.Property<DateOnly>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("OrderType")
@@ -110,7 +120,7 @@ namespace investAPI.Migrations
                             Id = 1,
                             AveragePrice = 10f,
                             CurrentQuote = 15f,
-                            Date = new DateOnly(2001, 11, 10),
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderType = 1,
                             Profit = 105f,
                             Quantity = 2,
@@ -122,12 +132,59 @@ namespace investAPI.Migrations
                             Id = 2,
                             AveragePrice = 10f,
                             CurrentQuote = 15f,
-                            Date = new DateOnly(2001, 11, 10),
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderType = 1,
                             Profit = 10f,
                             Quantity = 2,
                             Ticker = "WEG3",
                             Total = 20f
+                        });
+                });
+
+            modelBuilder.Entity("investAPI.Models.Yield", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("DividendYield")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Ticker")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("YieldType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Yields");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DividendYield = 0.59999999999999998,
+                            Ticker = "MXRF11",
+                            Value = 2.5,
+                            YieldType = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2001, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DividendYield = 0.40000000000000002,
+                            Ticker = "HGLG11",
+                            Value = 1.8,
+                            YieldType = 0
                         });
                 });
 #pragma warning restore 612, 618
